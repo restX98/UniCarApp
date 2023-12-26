@@ -15,4 +15,10 @@
 
     <!-- Login Activity. -->
     <string name="welcome_message">Welcome to UniCar</string>
+
+    <!-- Main Menu -->
+    <string name="label_profile">Profile</string>
+    <string name="label_history">History</string>
+    <string name="label_settings">Settings</string>
+
 </resources>

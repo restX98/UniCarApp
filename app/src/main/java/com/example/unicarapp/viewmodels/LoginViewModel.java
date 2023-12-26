@@ -1,18 +1,11 @@
 package com.example.unicarapp.viewmodels;
 
-import android.content.Intent;
-import android.database.Observable;
-import android.hardware.biometrics.BiometricPrompt;
-import android.view.View;
-
-import androidx.databinding.ObservableField;
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
 
 import com.example.unicarapp.data.model.AuthenticationResult;
 import com.example.unicarapp.data.repository.AuthRepository;
-import com.example.unicarapp.ui.SignupActivity;
 import com.google.firebase.auth.FirebaseUser;
 
 public class LoginViewModel extends ViewModel {
@@ -38,7 +31,6 @@ public class LoginViewModel extends ViewModel {
             @Override
             public void onAuthFailure(String errorMessage) {
                 authenticationResult.setValue(new AuthenticationResult(false, errorMessage));
-
             }
         });
     }
