@@ -1,3 +1,20 @@
 <resources>
     <string name="app_name">UniCarApp</string>
+
+    <string name="label_email">Email</string>
+    <string name="label_domain">\@mydomain.rest</string>
+    <string name="label_password">Password</string>
+    <string name="label_firstname">First Name</string>
+    <string name="label_lastname">Last Name</string>
+    <string name="label_department">Department</string>
+    <string name="label_photo">Photo</string>
+    <string name="label_hasCar">Do you have a car?</string>
+    <string name="label_car_plates">Plates</string>
+    <string name="label_car_color">Color</string>
+    <string name="label_car_model">Model</string>
+
+    <!-- Login Activity. -->
+    <string name="welcome_message">Welcome to UniCar</string>
+
+
 </resources>
