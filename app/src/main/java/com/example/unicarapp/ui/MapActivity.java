@@ -28,7 +28,7 @@ public class MapActivity extends AppCompatActivity {
         super.onStart();
 
         if (!mapViewModel.isAuthenticated()) {
-            startActivity(new Intent(this, MapActivity.class));
+            startActivity(new Intent(this, LoginActivity.class));
         }
     }
 
