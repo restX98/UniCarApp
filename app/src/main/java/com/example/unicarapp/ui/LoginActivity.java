@@ -7,7 +7,6 @@ import androidx.lifecycle.ViewModelProvider;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.text.TextUtils;
 import android.view.View;
 import android.widget.Toast;
 
@@ -22,6 +21,15 @@ public class LoginActivity extends AppCompatActivity {
     private ActivityLoginBinding binding;
 
     @Override
+    protected void onStart() {
+        super.onStart();
+
+        if (loginViewModel.isAuthenticated()) {
+            startActivity(new Intent(this, MapActivity.class));
+        }
+    }
+
+    @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
@@ -30,9 +38,8 @@ public class LoginActivity extends AppCompatActivity {
         // binding.setLifecycleOwner(this); // For LiveData to observe changes in this lifecycle
 
         loginViewModel = new ViewModelProvider(this).get(LoginViewModel.class);
-        binding.setViewModel(loginViewModel);
 
-        loginViewModel.isUserAuthenticated().observe(this, new AuthenticationObserver());
+        loginViewModel.getAuthenticationResult().observe(this, new AuthenticationObserver());
 
         binding.btnSignup.setOnClickListener(new ClickHandler());
         binding.btnLogin.setOnClickListener(new ClickHandler());
@@ -59,11 +66,7 @@ public class LoginActivity extends AppCompatActivity {
                 String email = emailUsername + emailDomain;
                 String password = binding.etPassword.getText().toString().trim();
 
-                if(!TextUtils.isEmpty(email) && !TextUtils.isEmpty(password)) {
-                    loginViewModel.onLoginButtonClicked(email, password);
-                } else {
-                    Toast.makeText(LoginActivity.this, "Fill all the fields!", Toast.LENGTH_SHORT).show();
-                }
+                loginViewModel.onLoginButtonClicked(email, password);
             } else if(btnId == R.id.btn_signup) {
                 startActivity(new Intent(LoginActivity.this, SignupActivity.class));
             }
