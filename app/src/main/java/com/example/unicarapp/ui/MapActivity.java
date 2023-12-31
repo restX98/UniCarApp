@@ -13,6 +13,7 @@ import android.view.View;
 import com.example.unicarapp.R;
 import com.example.unicarapp.data.model.User;
 import com.example.unicarapp.databinding.ActivityMapBinding;
+import com.example.unicarapp.ui.map.MapFragment;
 import com.example.unicarapp.viewmodels.MapViewModel;
 import com.google.android.material.navigation.NavigationView;
 
@@ -48,6 +49,12 @@ public class MapActivity extends AppCompatActivity {
 
         binding.fabProfile.setOnClickListener(new ClickHandler());
         binding.fabSignout.setOnClickListener(new ClickHandler());
+
+        if (savedInstanceState == null) {
+            getSupportFragmentManager().beginTransaction()
+                    .replace(R.id.mapFragmentContainer, new MapFragment())
+                    .commit();
+        }
     }
 
     private class CurrentUserObserver implements Observer<User> {
