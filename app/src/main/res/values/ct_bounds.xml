@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <array name="ct_bounds">
+        <item>37.561303, 15.046095</item>
+        <item>37.543411, 15.079082</item>
+        <item>37.537638, 15.107294</item>
+        <item>37.548702, 15.116394</item>
+        <item>37.535714, 15.126102</item>
+        <item>37.456828, 15.085687</item>
+        <item>37.464524, 15.024548</item>
+        <item>37.505559, 15.029935</item>
+        <item>37.553617, 15.037476</item>
+    </array>
+</resources>
