@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:padding="16dp">
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="This is a Bottom Sheet" />
+
+    <!-- Additional content that is initially invisible -->
+    <TextView
+        android:id="@+id/hiddenTextView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="This content is initially hidden"
+        android:visibility="invisible" />
+
+    <Button
+        android:id="@+id/showMoreButton"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Show More"
+        android:onClick="showMoreContent" />
+
+    <Button
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Dismiss"
+        android:onClick="dismissBottomSheet" />
+
+
+</LinearLayout>

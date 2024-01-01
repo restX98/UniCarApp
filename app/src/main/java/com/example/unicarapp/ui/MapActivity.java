@@ -73,7 +73,7 @@ public class MapActivity extends AppCompatActivity {
             if(btnId == R.id.fab_profile) {
                 drawerLayout.openDrawer(navigationView);
             } else if( btnId == R.id.fab_signout) {
-                 mapViewModel.signOut();
+                mapViewModel.signOut();
             }
         }
     }
