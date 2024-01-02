@@ -55,6 +55,16 @@ public class MapFragment extends Fragment implements OnMapReadyCallback,
         moveCameraToMyLocation();
 
         map.setOnCameraIdleListener(() -> updateRideMarker());
+
+        map.setOnMarkerClickListener(new GoogleMap.OnMarkerClickListener() {
+            @Override
+            public boolean onMarkerClick(@NonNull Marker marker) {
+                RideDialogFragment rideDialogFragment = new RideDialogFragment();
+                rideDialogFragment.show(
+                        getActivity().getSupportFragmentManager(), rideDialogFragment.getTag());
+                return true;
+            }
+        });
     }
 
     private void updateRideMarker() {
