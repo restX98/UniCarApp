@@ -3,17 +3,12 @@ package com.example.unicarapp.ui.map;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.core.app.ActivityCompat;
-import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
-import androidx.lifecycle.LifecycleOwner;
-import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
 
 import android.Manifest;
 import android.annotation.SuppressLint;
-import android.content.pm.PackageManager;
 import android.location.Location;
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -22,7 +17,7 @@ import android.view.ViewGroup;
 
 import com.example.unicarapp.R;
 import com.example.unicarapp.data.model.District;
-import com.example.unicarapp.data.model.User;
+import com.example.unicarapp.data.model.Ride;
 import com.example.unicarapp.data.repository.FirestoreRepository;
 import com.example.unicarapp.utils.PermissionUtils;
 import com.example.unicarapp.viewmodels.MapViewModel;
@@ -36,11 +31,8 @@ import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
 import com.google.android.gms.maps.model.PolygonOptions;
-import com.google.android.gms.maps.model.PolylineOptions;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.firestore.GeoPoint;
-
-import org.checkerframework.checker.units.qual.A;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -52,22 +44,39 @@ public class MapFragment extends Fragment implements OnMapReadyCallback,
     private FusedLocationProviderClient fusedLocationProviderClient;
     private final FirestoreRepository<District> districtsFirestoreRepository = new FirestoreRepository<>("districts");
     MapViewModel mapViewModel;
+    private List<Marker> markerList = new ArrayList<>();
 
     @Override
     public void onMapReady(GoogleMap googleMap) {
         map = googleMap;
-        // LatLng cittadella = new LatLng(37.526119, 15.074313);
-        // MarkerOptions options = new MarkerOptions();
-        // options.position(cittadella);
-        // map.addMarker(options);
 
         createDistrictBound(map);
         enableMyLocation();
         moveCameraToMyLocation();
+
+        map.setOnCameraIdleListener(() -> updateRideMarker());
+    }
+
+    private void updateRideMarker() {
+        mapViewModel.getRidesListLiveData(map).observe(getViewLifecycleOwner(), new Observer<List<Ride>>() {
+            @Override
+            public void onChanged(List<Ride> rideList) {
+                for(Marker oldMarker: markerList) {
+                    oldMarker.remove();
+                }
+                markerList.clear();
+                for (Ride ride: rideList) {
+                    MarkerOptions options = new MarkerOptions();
+                    options.position(new LatLng(ride.getLat(), ride.getLng()));
+                    markerList.add(map.addMarker(options));
+                }
+            }
+        });
+
     }
 
     private void createDistrictBound(GoogleMap map) {
-        mapViewModel.getDistrictListLiveData().observe((LifecycleOwner) getContext(), new Observer<List<District>>() {
+        mapViewModel.getDistrictListLiveData().observe(getViewLifecycleOwner(), new Observer<List<District>>() {
             @Override
             public void onChanged(List<District> districtList) {
                 PolygonOptions polygonOptions = new PolygonOptions();
