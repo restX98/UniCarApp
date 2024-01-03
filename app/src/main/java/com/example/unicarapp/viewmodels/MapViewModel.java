@@ -23,7 +23,7 @@ public class MapViewModel extends ViewModel {
     private final RealtimeDatabaseRepository<Ride> ridesRealtimeDatabaseRepository = new RealtimeDatabaseRepository<>("rides");
 
     public MapViewModel() {
-        this.userRepository = new UserRepository();
+        this.userRepository = UserRepository.getInstance();
     }
 
     public boolean isAuthenticated() {
@@ -46,7 +46,6 @@ public class MapViewModel extends ViewModel {
         LatLngBounds visibleBounds = googleMap.getProjection().getVisibleRegion().latLngBounds;
 
         RealtimeDatabaseFilter filter = new RealtimeDatabaseFilter("latLng");
-        filter.orderByChild("latLng");
         filter.startAt(Ride.mergeCoordinates(visibleBounds.southwest.latitude, visibleBounds.southwest.longitude));
         filter.endAt(Ride.mergeCoordinates(visibleBounds.northeast.latitude, visibleBounds.northeast.longitude));
 

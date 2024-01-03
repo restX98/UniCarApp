@@ -5,15 +5,11 @@ public class Ride {
     private double lng;
     private String latLng;
     private String userId;
+    private String from;
+    private String to;
+    private String title;
 
     public Ride() {
-    }
-
-    public Ride(double lat, double lng, String userId) {
-        this.lat = lat;
-        this.lng = lng;
-        this.latLng = Ride.mergeCoordinates(this.lat, this.lng);
-        this.userId = userId;
     }
 
     public String getLatLng() {

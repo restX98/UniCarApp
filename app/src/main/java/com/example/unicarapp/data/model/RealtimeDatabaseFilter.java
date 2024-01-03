@@ -12,10 +12,11 @@ public class RealtimeDatabaseFilter {
     public RealtimeDatabaseFilter(String attributeName) {
         filters = new ArrayList<>();
         this.attributeName = attributeName;
+        orderByChild();
     }
 
-    public void orderByChild(String child) {
-        filters.add(query -> query.orderByChild(child));
+    private void orderByChild() {
+        filters.add(query -> query.orderByChild(attributeName));
     }
 
     public void startAt(String value) {
@@ -31,7 +32,7 @@ public class RealtimeDatabaseFilter {
     }
 
     public void endAt(double value) {
-        filters.add(query -> query.endAt(value, attributeName));
+        filters.add(query -> query.endAt(value));
     }
 
     public Query applyAll(Query query) {
