@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    tools:context=".ui.main.WelcomeFragment">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <TextView
+            android:id="@+id/tv_welcome"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="88dp"
+            android:text="@string/welcome_message"
+            android:textSize="24sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"/>
+
+        <ImageView
+            android:id="@+id/iv_logo"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="44dp"
+            android:background="@drawable/ic_launcher_background"
+            android:src="@drawable/ic_launcher_foreground"
+            app:layout_constraintEnd_toEndOf="@+id/tv_welcome"
+            app:layout_constraintStart_toStartOf="@+id/tv_welcome"
+            app:layout_constraintTop_toBottomOf="@+id/tv_welcome" />
+
+        <Button
+            android:id="@+id/btn_goto_login"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="52dp"
+            android:text="Login"
+            app:layout_constraintEnd_toEndOf="@+id/iv_logo"
+            app:layout_constraintStart_toStartOf="@+id/iv_logo"
+            app:layout_constraintTop_toBottomOf="@+id/iv_logo" />
+
+        <Button
+            android:id="@+id/btn_goto_signup"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="52dp"
+            android:text="Signup"
+            app:layout_constraintEnd_toEndOf="@+id/btn_goto_login"
+            app:layout_constraintStart_toStartOf="@+id/btn_goto_login"
+            app:layout_constraintTop_toBottomOf="@+id/btn_goto_login" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</FrameLayout>

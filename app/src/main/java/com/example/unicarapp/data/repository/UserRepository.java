@@ -7,11 +7,13 @@ import androidx.lifecycle.MutableLiveData;
 import com.example.unicarapp.data.model.User;
 
 public class UserRepository {
+
+    private static volatile  UserRepository instance;
     private final AuthRepository authRepository;
     private final FirestoreRepository<User> userFirestoreRepository;
     private final MediatorLiveData<User> currentUserLiveData = new MediatorLiveData<>();
 
-    public UserRepository() {
+    private UserRepository() {
         this.authRepository = new AuthRepository();
         this.userFirestoreRepository = new FirestoreRepository<>("userProfiles");
 
@@ -29,6 +31,13 @@ public class UserRepository {
                 currentUserLiveData.setValue(null);
             }
         });
+    }
+
+    public static UserRepository getInstance() {
+        if(instance == null) {
+            instance = new UserRepository();
+        }
+        return instance;
     }
 
     public boolean isAuthenticated() {

@@ -13,6 +13,11 @@
     <string name="label_car_color">Color</string>
     <string name="label_car_model">Model</string>
 
+    <string name="label_login">LOGIN</string>
+
+    <string name="error_email">The email is not valid!</string>
+    <string name="error_password">The password is not valid!</string>
+
     <!-- Login Activity. -->
     <string name="welcome_message">Welcome to UniCar</string>
 

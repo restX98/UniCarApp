@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/welcome_navigation_graph"
+    app:startDestination="@id/welcome_fragment">
+
+    <fragment
+        android:id="@+id/welcome_fragment"
+        android:name="com.example.unicarapp.ui.main.WelcomeFragment"
+        android:label="WelcomeFragment"
+        tools:layout="@layout/fragment_welcome">
+        <action
+            android:id="@+id/action_welcome_fragment_to_loginFragment"
+            app:destination="@id/loginFragment" />
+        <action
+            android:id="@+id/action_welcome_fragment_to_signupStep1Fragment"
+            app:destination="@id/signupStep1Fragment" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/loginFragment"
+        android:name="com.example.unicarapp.ui.main.LoginFragment"
+        android:label="LoginFragment"
+        tools:layout="@layout/fragment_login">
+        <action
+            android:id="@+id/action_loginFragment_to_welcome_fragment"
+            app:destination="@id/welcome_fragment" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/signupStep1Fragment"
+        android:name="com.example.unicarapp.ui.main.SignupStep1Fragment"
+        android:label="SignupStep1Fragment"
+        tools:layout="@layout/fragment_signup_step1">
+        <action
+            android:id="@+id/action_signupStep1Fragment_to_welcome_fragment"
+            app:destination="@id/welcome_fragment" />
+    </fragment>
+</navigation>

@@ -62,4 +62,22 @@ public class AuthRepository {
         void onAuthSuccess(FirebaseUser user);
         void onAuthFailure(String errorMessage);
     }
+
+    public static class AuthStatus {
+        private boolean success;
+        private String errorMessage;
+
+        public AuthStatus(boolean success, String errorMessage) {
+            this.success = success;
+            this.errorMessage = errorMessage;
+        }
+
+        public boolean isSuccess() {
+            return success;
+        }
+
+        public String getErrorMessage() {
+            return errorMessage;
+        }
+    }
 }

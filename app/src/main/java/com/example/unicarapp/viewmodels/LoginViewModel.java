@@ -15,14 +15,13 @@ import com.example.unicarapp.data.repository.UserRepository;
 import com.google.firebase.auth.FirebaseUser;
 
 public class LoginViewModel extends AndroidViewModel {
-
     private UserRepository userRepository;
     private MutableLiveData<AuthenticationResult> authenticationResult = new MutableLiveData<>();
 
 
     public LoginViewModel(@NonNull Application application) {
         super(application);
-        userRepository = new UserRepository();
+        userRepository = UserRepository.getInstance();
     }
 
     public boolean isAuthenticated() {
