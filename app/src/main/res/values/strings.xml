@@ -8,7 +8,7 @@
     <string name="label_lastname">Last Name</string>
     <string name="label_department">Department</string>
     <string name="label_photo">Photo</string>
-    <string name="label_car_plates">Plates</string>
+    <string name="label_car_plate">Plate</string>
     <string name="label_car_color">Color</string>
     <string name="label_car_model">Model</string>
 

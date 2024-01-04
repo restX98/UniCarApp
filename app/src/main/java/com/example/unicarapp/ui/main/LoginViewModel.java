@@ -1,15 +1,12 @@
 package com.example.unicarapp.ui.main;
 
 import android.app.Application;
-import android.util.Patterns;
 
 import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
 import androidx.lifecycle.AndroidViewModel;
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 
-import com.example.unicarapp.R;
 import com.example.unicarapp.data.repository.AuthRepository;
 import com.example.unicarapp.data.repository.UserRepository;
 import com.example.unicarapp.utils.formvalidation.FormState;

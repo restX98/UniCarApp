@@ -5,6 +5,10 @@ public class User {
     private String firstname;
     private String lastname;
     private String department;
+    private boolean hasCar;
+    private String carPlate;
+    private String carColor;
+    private String carModel;
 
     public User() {
     }
@@ -44,5 +48,37 @@ public class User {
 
     public void setDepartment(String department) {
         this.department = department;
+    }
+
+    public boolean isHasCar() {
+        return hasCar;
+    }
+
+    public void setHasCar(boolean hasCar) {
+        this.hasCar = hasCar;
+    }
+
+    public String getCarPlate() {
+        return carPlate;
+    }
+
+    public void setCarPlate(String carPlate) {
+        this.carPlate = carPlate;
+    }
+
+    public String getCarColor() {
+        return carColor;
+    }
+
+    public void setCarColor(String carColor) {
+        this.carColor = carColor;
+    }
+
+    public String getCarModel() {
+        return carModel;
+    }
+
+    public void setCarModel(String carModel) {
+        this.carModel = carModel;
     }
 }

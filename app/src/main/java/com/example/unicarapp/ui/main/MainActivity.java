@@ -8,7 +8,6 @@ import android.os.Bundle;
 
 import com.example.unicarapp.R;
 import com.example.unicarapp.ui.MapActivity;
-import com.example.unicarapp.ui.main.LoginViewModel;
 
 public class MainActivity extends AppCompatActivity {
 

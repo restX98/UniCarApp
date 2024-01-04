@@ -29,7 +29,7 @@
             android:layout_marginTop="24dp"
             android:focusableInTouchMode="true"
             android:hint="@string/label_firstname"
-            android:inputType="textEmailAddress"
+            android:inputType="textPersonName"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/tv_info_2" />
@@ -41,7 +41,7 @@
             android:layout_marginTop="24dp"
             android:focusableInTouchMode="true"
             android:hint="@string/label_lastname"
-            android:inputType="textEmailAddress"
+            android:inputType="textPersonName"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/et_firstname" />
@@ -53,7 +53,7 @@
             android:layout_marginTop="28dp"
             android:focusableInTouchMode="true"
             android:hint="@string/label_department"
-            android:inputType="textEmailAddress"
+            android:inputType="text"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.65"
             app:layout_constraintStart_toStartOf="parent"
@@ -76,7 +76,6 @@
             android:enabled="false"
             android:text="@string/label_goto_summary"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.498"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/et_department" />
 
@@ -88,7 +87,6 @@
             android:enabled="false"
             android:text="@string/label_has_car"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.498"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/btn_goto_summary" />
 

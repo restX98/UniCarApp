@@ -58,19 +58,21 @@ public class SignupStep2Fragment extends Fragment {
         initFormState();
 
         gotoSummaryBtn.setOnClickListener(v -> {
-            signupViewModel.submitInfoForm(
+            signupViewModel.submitUserInfoForm(
                     firstnameEt.getText().toString(),
                     lastnameEt.getText().toString(),
-                    departmentEt.getText().toString());
+                    departmentEt.getText().toString(),
+                    false);
             Navigation.findNavController(v)
                     .navigate(R.id.action_signupStep2Fragment_to_signupSummaryFragment);
         });
 
         gotoStep3Btn.setOnClickListener(v -> {
-            signupViewModel.submitInfoForm(
+            signupViewModel.submitUserInfoForm(
                     firstnameEt.getText().toString(),
                     lastnameEt.getText().toString(),
-                    departmentEt.getText().toString());
+                    departmentEt.getText().toString(),
+                    true);
             Navigation.findNavController(v)
                     .navigate(R.id.action_signupStep2Fragment_to_signupStep3Fragment);
         });
@@ -89,7 +91,7 @@ public class SignupStep2Fragment extends Fragment {
         lastnameEt.addTextChangedListener(new TextListeners(lastnameEt));
         departmentEt.addTextChangedListener(new TextListeners(departmentEt));
 
-        formState = signupViewModel.getStep1FormState();
+        formState = signupViewModel.getStep2FormState();
 
         formState.addField(firstnameEt.getId());
         formState.addField(lastnameEt.getId());
@@ -115,12 +117,12 @@ public class SignupStep2Fragment extends Fragment {
 
             FormFieldState lastnameState = formState.getFieldState(lastnameEt.getId());
             if (!lastnameState.isValid() && lastnameState.getError() != null) {
-                firstnameEt.setError(lastnameState.getError());
+                lastnameEt.setError(lastnameState.getError());
             }
 
             FormFieldState departmentState = formState.getFieldState(departmentEt.getId());
             if (!departmentState.isValid() && departmentState.getError() != null) {
-                firstnameEt.setError(departmentState.getError());
+                departmentEt.setError(departmentState.getError());
             }
         }
     }

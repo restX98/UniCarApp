@@ -9,6 +9,7 @@ public class SignupViewModel extends ViewModel {
 
     private FormState step1FormState = new FormState();
     private FormState step2FormState = new FormState();
+    private FormState step3FormState = new FormState();
 
     private User newUser = new User();
 
@@ -22,13 +23,24 @@ public class SignupViewModel extends ViewModel {
         return step2FormState;
     }
 
+    public FormState getStep3FormState() {
+        return step3FormState;
+    }
+
     public void submitEmailForm(String email) {
         newUser.setEmail(email);
     }
 
-    public void submitInfoForm(String firstname, String lastname, String department) {
+    public void submitUserInfoForm(String firstname, String lastname, String department, boolean hasCar) {
         newUser.setFirstname(firstname);
         newUser.setLastname(lastname);
         newUser.setDepartment(department);
+        newUser.setHasCar(hasCar);
+    }
+
+    public void submitCarInfoForm(String plate, String color, String model) {
+        newUser.setCarPlate(plate);
+        newUser.setCarColor(color);
+        newUser.setCarModel(model);
     }
 }
