@@ -19,7 +19,6 @@ import android.widget.Button;
 import android.widget.EditText;
 
 import com.example.unicarapp.R;
-import com.example.unicarapp.data.model.User;
 import com.example.unicarapp.databinding.FragmentSignupStep1Binding;
 import com.example.unicarapp.utils.formvalidation.FormFieldState;
 import com.example.unicarapp.utils.formvalidation.FormState;
@@ -70,8 +69,7 @@ public class SignupStep1Fragment extends Fragment {
     }
 
     private void initFormState() {
-        emailEt.setOnFocusChangeListener(new EmailTextListeners());
-        emailEt.addTextChangedListener(new EmailTextListeners());
+        emailEt.addTextChangedListener(new TextListeners(emailEt));
 
         formState = signupViewModel.getStep1FormState();
 
@@ -99,12 +97,10 @@ public class SignupStep1Fragment extends Fragment {
         }
     }
 
-    private class EmailTextListeners implements TextWatcher, View.OnFocusChangeListener {
-        @Override
-        public void onFocusChange(View v, boolean hasFocus) {
-            if (!hasFocus) {
-                formState.getFieldState(emailEt.getId()).validate(emailEt.getText().toString());
-            }
+    private class TextListeners implements TextWatcher {
+        private EditText editText;
+        public TextListeners(EditText editText) {
+            this.editText = editText;
         }
 
         @Override
@@ -115,7 +111,7 @@ public class SignupStep1Fragment extends Fragment {
 
         @Override
         public void afterTextChanged(Editable s) {
-            formState.getFieldState(emailEt.getId()).validate(emailEt.getText().toString());
+            formState.getFieldState(editText.getId()).validate(editText.getText().toString());
         }
     }
 }

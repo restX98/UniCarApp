@@ -57,8 +57,6 @@ public class LoginFragment extends Fragment {
 
         initFormState();
 
-        // loginViewModel.getLoginFormState().observe(getViewLifecycleOwner(), new ValidationObserver());
-
         loginViewModel.getAuthenticationStatus().observe(getViewLifecycleOwner(), new AuthenticationObserver());
 
         loginBtn.setOnClickListener(v -> loginViewModel.signIn(emailEt.getText().toString(), passwordEt.getText().toString()));

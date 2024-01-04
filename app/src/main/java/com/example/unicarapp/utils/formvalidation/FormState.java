@@ -28,6 +28,13 @@ public class FormState {
         return getFieldState(fieldId);
     }
 
+    public FormFieldState addField(int fieldId, FormFieldState.ValidationCallback validationCallback) {
+        if (!fieldStates.containsKey(fieldId)) {
+            fieldStates.put(fieldId, new FormFieldState(this, validationCallback));
+        }
+        return getFieldState(fieldId);
+    }
+
     public FormFieldState addField(int fieldId, Pattern regexPattern, FormFieldState.ValidationCallback validationCallback) {
         if (!fieldStates.containsKey(fieldId)) {
             fieldStates.put(fieldId, new FormFieldState(this, regexPattern, validationCallback));

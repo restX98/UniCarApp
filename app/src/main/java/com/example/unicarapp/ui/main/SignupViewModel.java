@@ -10,6 +10,7 @@ public class SignupViewModel extends ViewModel {
     private FormState step1FormState = new FormState();
     private FormState step2FormState = new FormState();
     private FormState step3FormState = new FormState();
+    private FormState summaryFormState = new FormState();
 
     private User newUser = new User();
 
@@ -25,6 +26,10 @@ public class SignupViewModel extends ViewModel {
 
     public FormState getStep3FormState() {
         return step3FormState;
+    }
+
+    public FormState getSummaryFormState() {
+        return summaryFormState;
     }
 
     public User getUser() {
