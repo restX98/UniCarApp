@@ -28,7 +28,7 @@ public class SignupStep1Fragment extends Fragment {
     private SignupViewModel signupViewModel;
     private FragmentSignupStep1Binding binding;
 
-    FormState formState;
+    private FormState formState;
     private EditText emailEt;
     private Button gotoStep2Btn;
 
@@ -43,7 +43,7 @@ public class SignupStep1Fragment extends Fragment {
         emailEt = binding.etEmail;
         gotoStep2Btn = binding.btnGotoStep2;
 
-        signupViewModel = new ViewModelProvider(this).get(SignupViewModel.class);
+        signupViewModel = new ViewModelProvider(requireActivity()).get(SignupViewModel.class);
 
         return binding.getRoot();
     }
@@ -54,10 +54,11 @@ public class SignupStep1Fragment extends Fragment {
 
         initFormState();
 
-        gotoStep2Btn.setOnClickListener(v -> Navigation
-                .findNavController(v).navigate(R.id.action_loginFragment_to_welcome_fragment));
-//        binding.btnBack.setOnClickListener(v -> Navigation
-//                .findNavController(v).navigate(R.id.action_loginFragment_to_welcome_fragment));
+        gotoStep2Btn.setOnClickListener(v -> {
+            signupViewModel.submitEmailForm(emailEt.getText().toString());
+            Navigation.findNavController(v)
+                    .navigate(R.id.action_signupStep1Fragment_to_signupStep2Fragment);
+        });
     }
 
     @Override
@@ -105,14 +106,10 @@ public class SignupStep1Fragment extends Fragment {
         }
 
         @Override
-        public void beforeTextChanged(CharSequence s, int start, int count, int after) {
-
-        }
+        public void beforeTextChanged(CharSequence s, int start, int count, int after) {}
 
         @Override
-        public void onTextChanged(CharSequence s, int start, int before, int count) {
-
-        }
+        public void onTextChanged(CharSequence s, int start, int before, int count) {}
 
         @Override
         public void afterTextChanged(Editable s) {

@@ -93,8 +93,10 @@ public class FormFieldState {
     }
 
     public void setStatus(Status status) {
-        statusLiveData.setValue(status);
-        this.form.updateLiveData();
+        if(getStatus() != status) {
+            statusLiveData.setValue(status);
+            this.form.updateLiveData();
+        }
     }
 
     public boolean isValid() {

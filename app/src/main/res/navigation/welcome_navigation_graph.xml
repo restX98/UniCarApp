@@ -36,5 +36,51 @@
         <action
             android:id="@+id/action_signupStep1Fragment_to_welcome_fragment"
             app:destination="@id/welcome_fragment" />
+        <action
+            android:id="@+id/action_signupStep1Fragment_to_signupStep2Fragment"
+            app:destination="@id/signupStep2Fragment" />
     </fragment>
+
+    <fragment
+        android:id="@+id/signupStep2Fragment"
+        android:name="com.example.unicarapp.ui.main.SignupStep2Fragment"
+        android:label="SignupStep2Fragment"
+        tools:layout="@layout/fragment_signup_step2">
+        <action
+            android:id="@+id/action_signupStep2Fragment_to_signupStep1Fragment"
+            app:destination="@id/signupStep1Fragment" />
+        <action
+            android:id="@+id/action_signupStep2Fragment_to_signupStep3Fragment"
+            app:destination="@id/signupStep3Fragment" />
+        <action
+            android:id="@+id/action_signupStep2Fragment_to_signupSummaryFragment"
+            app:destination="@id/signupSummaryFragment" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/signupStep3Fragment"
+        android:name="com.example.unicarapp.ui.main.SignupStep3Fragment"
+        android:label="SignupStep3Fragment"
+        tools:layout="@layout/fragment_signup_step3">
+        <action
+            android:id="@+id/action_signupStep3Fragment_to_signupStep2Fragment"
+            app:destination="@id/signupStep2Fragment" />
+        <action
+            android:id="@+id/action_signupStep3Fragment_to_signupSummaryFragment"
+            app:destination="@id/signupSummaryFragment" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/signupSummaryFragment"
+        android:name="com.example.unicarapp.ui.main.SignupSummaryFragment"
+        android:label="SignupSummaryFragment"
+        tools:layout="@layout/fragment_signup_summary">
+        <action
+            android:id="@+id/action_signupSummaryFragment_to_signupStep3Fragment"
+            app:destination="@id/signupStep3Fragment" />
+        <action
+            android:id="@+id/action_signupSummaryFragment_to_signupStep2Fragment"
+            app:destination="@id/signupStep2Fragment" />
+    </fragment>
+
 </navigation>

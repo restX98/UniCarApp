@@ -8,12 +8,14 @@
     <string name="label_lastname">Last Name</string>
     <string name="label_department">Department</string>
     <string name="label_photo">Photo</string>
-    <string name="label_hasCar">Do you have a car?</string>
     <string name="label_car_plates">Plates</string>
     <string name="label_car_color">Color</string>
     <string name="label_car_model">Model</string>
 
     <string name="label_login">LOGIN</string>
+    <string name="label_next_step">Next Step</string>
+    <string name="label_goto_summary">Go to summary</string>
+    <string name="label_has_car">Wanna share your car?</string>
 
     <string name="error_email">The email is not valid!</string>
     <string name="error_password">The password is not valid!</string>
