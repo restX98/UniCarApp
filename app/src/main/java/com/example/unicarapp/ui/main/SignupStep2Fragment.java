@@ -38,7 +38,10 @@ public class SignupStep2Fragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
+        signupViewModel = new ViewModelProvider(requireActivity()).get(SignupViewModel.class);
+
         binding = FragmentSignupStep2Binding.inflate(inflater, container, false);
+        binding.setUser(signupViewModel.getUser());
 
         firstnameEt = binding.etFirstname;
         lastnameEt = binding.etLastname;
@@ -46,7 +49,6 @@ public class SignupStep2Fragment extends Fragment {
         gotoSummaryBtn = binding.btnGotoSummary;
         gotoStep3Btn = binding.btnGotoStep3;
 
-        signupViewModel = new ViewModelProvider(this).get(SignupViewModel.class);
 
         return binding.getRoot();
     }

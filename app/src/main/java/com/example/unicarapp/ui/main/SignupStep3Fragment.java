@@ -38,14 +38,15 @@ public class SignupStep3Fragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
+        signupViewModel = new ViewModelProvider(requireActivity()).get(SignupViewModel.class);
+
         binding = FragmentSignupStep3Binding.inflate(inflater, container, false);
+        binding.setUser(signupViewModel.getUser());
 
         carPlateEt = binding.etCarPlate;
         carColorEt = binding.etCarColor;
         carModelEt = binding.etCarModel;
         gotoSummaryBtn = binding.btnGotoSummary;
-
-        signupViewModel = new ViewModelProvider(this).get(SignupViewModel.class);
 
         return binding.getRoot();
     }

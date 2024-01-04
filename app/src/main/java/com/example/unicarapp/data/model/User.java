@@ -58,27 +58,26 @@ public class User {
         this.hasCar = hasCar;
     }
 
-    public String getCarPlate() {
-        return carPlate;
-    }
-
     public void setCarPlate(String carPlate) {
         this.carPlate = carPlate;
     }
-
-    public String getCarColor() {
-        return carColor;
+    public String getCarPlate() {
+        return carPlate;
     }
 
     public void setCarColor(String carColor) {
         this.carColor = carColor;
     }
 
-    public String getCarModel() {
-        return carModel;
+    public String getCarColor() {
+        return carColor;
     }
 
     public void setCarModel(String carModel) {
         this.carModel = carModel;
+    }
+
+    public String getCarModel() {
+        return carModel;
     }
 }

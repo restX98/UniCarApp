@@ -13,9 +13,20 @@
     <string name="label_car_model">Model</string>
 
     <string name="label_login">LOGIN</string>
+    <string name="label_signup">SIGNUP</string>
     <string name="label_next_step">Next Step</string>
     <string name="label_goto_summary">Go to summary</string>
     <string name="label_has_car">Wanna share your car?</string>
+
+    <string name="label_summary_user_info">User Information</string>
+    <string name="label_summary_car_info">Car Information</string>
+    <string name="label_summary_email">Email: %1$s</string>
+    <string name="label_summary_firstname">Firstname: %1$s</string>
+    <string name="label_summary_lastname">Lastname: %1$s</string>
+    <string name="label_summary_department">Department: %1$s</string>
+    <string name="label_summary_car_plate">Plate: %1$s</string>
+    <string name="label_summary_car_color">Color: %1$s</string>
+    <string name="label_summary_car_model">Model: %1$s</string>
 
     <string name="error_email">The email is not valid!</string>
     <string name="error_password">The password is not valid!</string>

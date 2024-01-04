@@ -19,6 +19,7 @@ import android.widget.Button;
 import android.widget.EditText;
 
 import com.example.unicarapp.R;
+import com.example.unicarapp.data.model.User;
 import com.example.unicarapp.databinding.FragmentSignupStep1Binding;
 import com.example.unicarapp.utils.formvalidation.FormFieldState;
 import com.example.unicarapp.utils.formvalidation.FormState;
@@ -37,13 +38,14 @@ public class SignupStep1Fragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
+        signupViewModel = new ViewModelProvider(requireActivity()).get(SignupViewModel.class);
 
         binding = FragmentSignupStep1Binding.inflate(inflater, container, false);
+        binding.setUser(signupViewModel.getUser());
 
         emailEt = binding.etEmail;
         gotoStep2Btn = binding.btnGotoStep2;
 
-        signupViewModel = new ViewModelProvider(requireActivity()).get(SignupViewModel.class);
 
         return binding.getRoot();
     }

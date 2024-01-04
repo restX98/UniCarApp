@@ -27,6 +27,10 @@ public class SignupViewModel extends ViewModel {
         return step3FormState;
     }
 
+    public User getUser() {
+        return newUser;
+    }
+
     public void submitEmailForm(String email) {
         newUser.setEmail(email);
     }
