@@ -11,56 +11,39 @@
         android:layout_height="match_parent"
         android:padding="10dp">
 
-        <LinearLayout
+        <TextView
+            android:id="@+id/tv_info_1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="108dp"
+            android:text="Insert a valid email to proceed"
+            android:textSize="24sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <EditText
             android:id="@+id/et_email"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            app:layout_constraintEnd_toEndOf="parent"
-            android:layout_marginTop="180dp"
+            android:focusableInTouchMode="true"
+            android:layout_marginTop="24dp"
+            android:hint="@string/label_email"
+            android:inputType="textEmailAddress"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent">
-
-            <EditText
-                android:id="@+id/et_email_username"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:hint="@string/label_email"
-                android:inputType="textEmailAddress"
-                android:padding="8dp" />
-
-            <TextView
-                android:id="@+id/tv_email_domain"
-                android:layout_width="wrap_content"
-                android:layout_height="match_parent"
-                android:background="@android:color/darker_gray"
-                android:gravity="center_vertical"
-                android:paddingStart="2dp"
-                android:paddingEnd="10dp"
-                android:text="@string/label_domain"
-                android:textColor="@android:color/black" />
-        </LinearLayout>
-
-        <EditText
-            android:id="@+id/et_password"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="28dp"
-            android:hint="Password"
-            android:inputType="textPassword"
-            app:layout_constraintEnd_toEndOf="@+id/et_email"
-            app:layout_constraintStart_toStartOf="@+id/et_email"
-            app:layout_constraintTop_toBottomOf="@+id/et_email" />
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/tv_info_1"/>
 
         <Button
-            android:id="@+id/btn_login"
+            android:id="@+id/btn_goto_step2"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="28dp"
             android:text="Next Step"
-            app:layout_constraintEnd_toEndOf="@+id/et_password"
-            app:layout_constraintStart_toStartOf="@+id/et_password"
-            app:layout_constraintTop_toBottomOf="@+id/et_password" />
+            android:enabled="false"
+            app:layout_constraintEnd_toEndOf="@+id/et_email"
+            app:layout_constraintStart_toStartOf="@+id/et_email"
+            app:layout_constraintTop_toBottomOf="@+id/et_email" />
 
         <ImageButton
             android:id="@+id/btn_back"
