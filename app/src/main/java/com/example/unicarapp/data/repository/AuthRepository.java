@@ -33,6 +33,21 @@ public class AuthRepository {
         });
     }
 
+    public void createUserWithEmailAndPassword(String email, String password, AuthCallback authCallback) {
+        firebaseAuth.createUserWithEmailAndPassword(email, password)
+                .addOnCompleteListener(new OnCompleteListener<AuthResult>() {
+                    @Override
+                    public void onComplete(@NonNull Task<AuthResult> task) {
+                        if(task.isSuccessful()) {
+                            FirebaseUser user = firebaseAuth.getCurrentUser();
+                            authCallback.onAuthSuccess(user);
+                        } else {
+                            authCallback.onAuthFailure("User creation failed!");
+                        }
+                    }
+                });
+    }
+
     public void signInWithEmailAndPassword(String email, String password, AuthCallback authCallback) {
         firebaseAuth.signInWithEmailAndPassword(email, password)
                 .addOnCompleteListener(new OnCompleteListener<AuthResult>() {
@@ -61,6 +76,11 @@ public class AuthRepository {
     public interface AuthCallback {
         void onAuthSuccess(FirebaseUser user);
         void onAuthFailure(String errorMessage);
+    }
+
+    public interface SignupCallback {
+        void onSignupSuccess();
+        void onSignupFailure(String errorMessage);
     }
 
     public static class AuthStatus {

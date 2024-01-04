@@ -1,23 +1,27 @@
 package com.example.unicarapp.ui.main;
 
+import android.content.Intent;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
 
 import android.text.Editable;
 import android.text.TextWatcher;
-import android.util.Patterns;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.Toast;
 
+import com.example.unicarapp.data.repository.AuthRepository;
 import com.example.unicarapp.databinding.FragmentSignupSummaryBinding;
+import com.example.unicarapp.ui.MapActivity;
 import com.example.unicarapp.utils.formvalidation.FormFieldState;
 import com.example.unicarapp.utils.formvalidation.FormState;
 
@@ -52,8 +56,10 @@ public class SignupSummaryFragment extends Fragment {
 
         initFormState();
 
+        signupViewModel.getAuthenticationStatus().observe(getViewLifecycleOwner(), new AuthenticationObserver());
+
         signupBtn.setOnClickListener(v -> {
-            
+            signupViewModel.signUp(passwordEt.getText().toString());
         });
     }
 
@@ -75,6 +81,17 @@ public class SignupSummaryFragment extends Fragment {
         passwordField.setErrorMessage(FormFieldState.Status.INVALID_CUSTOM, "Min length is 6.");
 
         formState.getFormStateLiveData().observe(getViewLifecycleOwner(), new SummaryValidationObserver());
+    }
+
+    private class AuthenticationObserver implements Observer<AuthRepository.AuthStatus> {
+        @Override
+        public void onChanged(AuthRepository.AuthStatus authenticationResult) {
+            if(authenticationResult.isSuccess()) {
+                startActivity(new Intent(requireContext(), MapActivity.class));
+            } else {
+                Toast.makeText(requireContext(), authenticationResult.getErrorMessage(), Toast.LENGTH_SHORT).show();
+            }
+        }
     }
 
     private class SummaryValidationObserver implements Observer<FormState> {

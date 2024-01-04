@@ -1,11 +1,18 @@
 package com.example.unicarapp.ui.main;
 
+import androidx.lifecycle.LiveData;
+import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
 
 import com.example.unicarapp.data.model.User;
+import com.example.unicarapp.data.repository.AuthRepository;
+import com.example.unicarapp.data.repository.UserRepository;
 import com.example.unicarapp.utils.formvalidation.FormState;
 
 public class SignupViewModel extends ViewModel {
+
+    private final UserRepository userRepository;
+    private MutableLiveData<AuthRepository.AuthStatus> authenticationStatus = new MutableLiveData<>();
 
     private FormState step1FormState = new FormState();
     private FormState step2FormState = new FormState();
@@ -14,7 +21,9 @@ public class SignupViewModel extends ViewModel {
 
     private User newUser = new User();
 
-    public SignupViewModel() { }
+    public SignupViewModel() {
+        userRepository = UserRepository.getInstance();
+    }
 
     public FormState getStep1FormState() {
         return step1FormState;
@@ -30,6 +39,10 @@ public class SignupViewModel extends ViewModel {
 
     public FormState getSummaryFormState() {
         return summaryFormState;
+    }
+
+    public LiveData<AuthRepository.AuthStatus> getAuthenticationStatus() {
+        return authenticationStatus;
     }
 
     public User getUser() {
@@ -51,5 +64,19 @@ public class SignupViewModel extends ViewModel {
         newUser.setCarPlate(plate);
         newUser.setCarColor(color);
         newUser.setCarModel(model);
+    }
+
+    public void signUp(String password) {
+        userRepository.signUp(newUser, password, new AuthRepository.SignupCallback() {
+            @Override
+            public void onSignupSuccess() {
+                authenticationStatus.setValue(new AuthRepository.AuthStatus(true, null));
+            }
+
+            @Override
+            public void onSignupFailure(String errorMessage) {
+                authenticationStatus.setValue(new AuthRepository.AuthStatus(false, errorMessage));
+            }
+        });
     }
 }

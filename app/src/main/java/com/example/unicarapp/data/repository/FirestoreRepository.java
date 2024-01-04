@@ -5,6 +5,7 @@ import androidx.lifecycle.MutableLiveData;
 
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
+import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
@@ -20,6 +21,37 @@ public class FirestoreRepository<T> {
     public FirestoreRepository(String collectionName) {
         this.firestore = FirebaseFirestore.getInstance();
         this.collectionName = collectionName;
+    }
+
+    public void addDocument(String documentId, T data, FirestoreCallback firestoreCallback) {
+        firestore.collection(collectionName)
+                .document(documentId)
+                .set(data)
+                .addOnCompleteListener(new OnCompleteListener<Void>() {
+                    @Override
+                    public void onComplete(@NonNull Task<Void> task) {
+                        onCompleteHandler(task, firestoreCallback);
+                    }
+                });
+    }
+
+    public void addDocument(T data, FirestoreCallback firestoreCallback) {
+        firestore.collection(collectionName)
+                .add(data)
+                .addOnCompleteListener(new OnCompleteListener<DocumentReference>() {
+                    @Override
+                    public void onComplete(@NonNull Task<DocumentReference> task) {
+                        onCompleteHandler(task, firestoreCallback);
+                    }
+                });
+    }
+
+    private void onCompleteHandler(Task<?> task, FirestoreCallback firestoreCallback) {
+        if (task.isSuccessful()) {
+            firestoreCallback.onLoadSuccess();
+        } else {
+            firestoreCallback.onLoadFailure("Something went wrong!");
+        }
     }
 
     public MutableLiveData<List<T>> getAllDocumentData(Class<T> type) {
@@ -66,5 +98,10 @@ public class FirestoreRepository<T> {
                 });
 
         return resultLiveData;
+    }
+
+    public interface FirestoreCallback {
+        void onLoadSuccess();
+        void onLoadFailure(String errorMessage);
     }
 }
