@@ -25,14 +25,12 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-
         <activity
             android:name=".ui.welcome.WelcomeActivity"
-            android:exported="false"/>
-
+            android:exported="false" />
         <activity
-            android:name=".ui.MapActivity"
-            android:exported="false"/>
+            android:name=".ui.map.MapActivity"
+            android:exported="false" />
 
         <meta-data
             android:name="com.google.android.geo.API_KEY"

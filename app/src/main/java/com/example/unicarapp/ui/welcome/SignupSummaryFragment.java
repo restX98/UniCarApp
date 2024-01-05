@@ -17,7 +17,7 @@ import androidx.lifecycle.ViewModelProvider;
 
 import com.example.unicarapp.data.repository.AuthRepository;
 import com.example.unicarapp.databinding.FragmentSignupSummaryBinding;
-import com.example.unicarapp.ui.MapActivity;
+import com.example.unicarapp.ui.map.MapActivity;
 import com.example.unicarapp.utils.formvalidation.FormFieldState;
 import com.example.unicarapp.utils.formvalidation.FormState;
 import com.example.unicarapp.utils.formvalidation.FormTextWatcher;

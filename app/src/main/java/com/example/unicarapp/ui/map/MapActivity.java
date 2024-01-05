@@ -1,4 +1,4 @@
-package com.example.unicarapp.ui;
+package com.example.unicarapp.ui.map;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.databinding.DataBindingUtil;
@@ -6,14 +6,12 @@ import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
 
-import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 
 import com.example.unicarapp.R;
 import com.example.unicarapp.data.model.User;
 import com.example.unicarapp.databinding.ActivityMapBinding;
-import com.example.unicarapp.ui.map.MapFragment;
 import com.example.unicarapp.viewmodels.MapViewModel;
 import com.google.android.material.navigation.NavigationView;
 
@@ -29,7 +27,7 @@ public class MapActivity extends AppCompatActivity {
         super.onStart();
 
         if (!mapViewModel.isAuthenticated()) {
-            startActivity(new Intent(this, LoginActivity.class));
+            // startActivity(new Intent(this, LoginActivity.class));
         }
     }
 
@@ -45,10 +43,10 @@ public class MapActivity extends AppCompatActivity {
         drawerLayout = binding.drawerLayout;
         navigationView = binding.navView;
 
-        mapViewModel.getCurrentUserLiveData().observe(this, new CurrentUserObserver());
+        mapViewModel.getCurrentUserLiveData().observe(this, new MapActivity.CurrentUserObserver());
 
-        binding.fabProfile.setOnClickListener(new ClickHandler());
-        binding.fabSignout.setOnClickListener(new ClickHandler());
+        binding.fabProfile.setOnClickListener(new MapActivity.ClickHandler());
+        binding.fabSignout.setOnClickListener(new MapActivity.ClickHandler());
 
         if (savedInstanceState == null) {
             getSupportFragmentManager().beginTransaction()
@@ -61,7 +59,7 @@ public class MapActivity extends AppCompatActivity {
         @Override
         public void onChanged(User user) {
             if(user == null) {
-                startActivity(new Intent(MapActivity.this, LoginActivity.class));
+                // startActivity(new Intent(MapActivity.this, LoginActivity.class));
             }
         }
     }
