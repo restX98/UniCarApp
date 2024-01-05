@@ -49,6 +49,30 @@ public class Ride {
         this.userId = userId;
     }
 
+    public String getFrom() {
+        return from;
+    }
+
+    public void setFrom(String from) {
+        this.from = from;
+    }
+
+    public String getTo() {
+        return to;
+    }
+
+    public void setTo(String to) {
+        this.to = to;
+    }
+
+    public String getTitle() {
+        return title;
+    }
+
+    public void setTitle(String title) {
+        this.title = title;
+    }
+
     public static String mergeCoordinates(double lat, double lng) {
         double absLat = lat + 90;
         double absLng = lng + 180;

@@ -54,4 +54,23 @@ public class RealtimeDatabaseRepository<T> {
 
         return dataListLiveData;
     }
+
+//    public MutableLiveData<T> getData(String dataId, Class<T> type) {
+//        MutableLiveData<T> resultLiveData = new MutableLiveData<>();
+//
+//        databaseReference.child(dataId).addListenerForSingleValueEvent(new ValueEventListener() {
+//            @Override
+//            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+//                T result = dataSnapshot.getValue(type);
+//                resultLiveData.setValue(result);
+//            }
+//
+//            @Override
+//            public void onCancelled(@NonNull DatabaseError databaseError) {
+//                resultLiveData.setValue(null);
+//            }
+//        });
+//
+//        return resultLiveData;
+//    }
 }

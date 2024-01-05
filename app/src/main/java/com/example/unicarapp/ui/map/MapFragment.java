@@ -20,7 +20,6 @@ import com.example.unicarapp.data.model.District;
 import com.example.unicarapp.data.model.Ride;
 import com.example.unicarapp.data.repository.FirestoreRepository;
 import com.example.unicarapp.utils.PermissionUtils;
-import com.example.unicarapp.viewmodels.MapViewModel;
 import com.google.android.gms.location.FusedLocationProviderClient;
 import com.google.android.gms.location.LocationServices;
 import com.google.android.gms.maps.CameraUpdateFactory;
@@ -78,7 +77,9 @@ public class MapFragment extends Fragment implements OnMapReadyCallback,
                 for (Ride ride: rideList) {
                     MarkerOptions options = new MarkerOptions();
                     options.position(new LatLng(ride.getLat(), ride.getLng()));
-                    markerList.add(map.addMarker(options));
+                    Marker marker = map.addMarker(options);
+                    marker.setTag(ride);
+                    markerList.add(marker);
                 }
             }
         });
@@ -100,8 +101,8 @@ public class MapFragment extends Fragment implements OnMapReadyCallback,
                     polygonOptions.add(new LatLng(Double.parseDouble(firstLatLng[0]), Double.parseDouble(firstLatLng[1])));
                 }
 
-                ArrayList<LatLng> districtHole = new ArrayList<>();
                 for (District district: districtList) {
+                    ArrayList<LatLng> districtHole = new ArrayList<>();
                     List<GeoPoint> bounds = district.getBounds();
                     for (GeoPoint vertex: bounds) {
                         districtHole.add(new LatLng(vertex.getLatitude(), vertex.getLongitude()));
