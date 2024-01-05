@@ -1,14 +1,8 @@
-package com.example.unicarapp.ui.main;
+package com.example.unicarapp.ui.welcome;
 
 import android.content.Intent;
 import android.os.Bundle;
-
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
-import androidx.fragment.app.Fragment;
-import androidx.lifecycle.Observer;
-import androidx.lifecycle.ViewModelProvider;
-
+import android.util.Patterns;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -16,34 +10,41 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.fragment.app.Fragment;
+import androidx.lifecycle.Observer;
+import androidx.lifecycle.ViewModelProvider;
+
 import com.example.unicarapp.data.repository.AuthRepository;
-import com.example.unicarapp.databinding.FragmentSignupSummaryBinding;
+import com.example.unicarapp.databinding.FragmentLoginBinding;
 import com.example.unicarapp.ui.MapActivity;
 import com.example.unicarapp.utils.formvalidation.FormFieldState;
 import com.example.unicarapp.utils.formvalidation.FormState;
 import com.example.unicarapp.utils.formvalidation.FormTextWatcher;
 
-public class SignupSummaryFragment extends Fragment {
+public class LoginFragment extends Fragment {
 
-    private SignupViewModel signupViewModel;
-    private FragmentSignupSummaryBinding binding;
+    private LoginViewModel loginViewModel;
+    private FragmentLoginBinding binding;
 
     FormState formState;
+    private EditText emailEt;
     private EditText passwordEt;
-    private Button signupBtn;
+    private Button loginBtn;
 
-    public SignupSummaryFragment() { }
+    public LoginFragment() {}
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        signupViewModel = new ViewModelProvider(requireActivity()).get(SignupViewModel.class);
+        loginViewModel = new ViewModelProvider(this).get(LoginViewModel.class);
 
-        binding = FragmentSignupSummaryBinding.inflate(inflater, container, false);
-        binding.setUser(signupViewModel.getUser());
+        binding = FragmentLoginBinding.inflate(inflater, container, false);
 
+        emailEt = binding.etEmail;
         passwordEt = binding.etPassword;
-        signupBtn = binding.btnSignup;
+        loginBtn = binding.btnLogin;
 
         return binding.getRoot();
     }
@@ -54,12 +55,11 @@ public class SignupSummaryFragment extends Fragment {
 
         initFormState();
 
-        signupViewModel.getAuthenticationStatus()
-                .observe(getViewLifecycleOwner(), new AuthenticationObserver());
+        loginViewModel.getAuthenticationStatus().observe(
+                getViewLifecycleOwner(), new AuthenticationObserver());
 
-        signupBtn.setOnClickListener(v -> {
-            signupViewModel.signUp(passwordEt.getText().toString());
-        });
+        loginBtn.setOnClickListener(v ->
+                loginViewModel.signIn(emailEt.getText().toString(), passwordEt.getText().toString()));
     }
 
     @Override
@@ -69,18 +69,16 @@ public class SignupSummaryFragment extends Fragment {
     }
 
     private void initFormState() {
+        formState = loginViewModel.getLoginFormState();
+
+        formState.addField(emailEt.getId(), Patterns.EMAIL_ADDRESS);
+        formState.addField(passwordEt.getId());
+
+        formState.getFormStateLiveData().observe(
+                getViewLifecycleOwner(), new LoginValidationObserver());
+
+        emailEt.addTextChangedListener(new FormTextWatcher(formState, emailEt));
         passwordEt.addTextChangedListener(new FormTextWatcher(formState, passwordEt));
-
-        formState = signupViewModel.getSummaryFormState();
-
-        FormFieldState passwordField = formState.addField(passwordEt.getId(),
-                value -> value.length() > 5
-                        ? FormFieldState.Status.VALID : FormFieldState.Status.INVALID_CUSTOM
-        );
-        passwordField.setErrorMessage(FormFieldState.Status.INVALID_CUSTOM, "Min length is 6.");
-
-        formState.getFormStateLiveData()
-                .observe(getViewLifecycleOwner(), new SummaryValidationObserver());
     }
 
     private class AuthenticationObserver implements Observer<AuthRepository.AuthStatus> {
@@ -95,16 +93,23 @@ public class SignupSummaryFragment extends Fragment {
         }
     }
 
-    private class SummaryValidationObserver implements Observer<FormState> {
+    private class LoginValidationObserver implements Observer<FormState> {
+
         @Override
         public void onChanged(FormState formState) {
             if (formState == null) {
                 return;
             }
 
-            signupBtn.setEnabled(formState.isFormValid());
+            loginBtn.setEnabled(formState.isFormValid());
+
+            FormFieldState emailState = formState.getFieldState(emailEt.getId());
+            if (!emailState.isValid() && emailState.getError() != null) {
+                emailEt.setError(emailState.getError());
+            }
+
             FormFieldState passwordState = formState.getFieldState(passwordEt.getId());
-            if (!passwordState.isValid() && passwordState.getError() != null) {
+            if(!passwordState.isValid() && passwordState.getError() != null) {
                 passwordEt.setError(passwordState.getError());
             }
         }

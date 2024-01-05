@@ -7,7 +7,7 @@
 
     <fragment
         android:id="@+id/welcome_fragment"
-        android:name="com.example.unicarapp.ui.main.WelcomeFragment"
+        android:name="com.example.unicarapp.ui.welcome.WelcomeFragment"
         android:label="WelcomeFragment"
         tools:layout="@layout/fragment_welcome">
         <action
@@ -20,7 +20,7 @@
 
     <fragment
         android:id="@+id/loginFragment"
-        android:name="com.example.unicarapp.ui.main.LoginFragment"
+        android:name="com.example.unicarapp.ui.welcome.LoginFragment"
         android:label="LoginFragment"
         tools:layout="@layout/fragment_login">
         <action
@@ -30,7 +30,7 @@
 
     <fragment
         android:id="@+id/signupStep1Fragment"
-        android:name="com.example.unicarapp.ui.main.SignupStep1Fragment"
+        android:name="com.example.unicarapp.ui.welcome.SignupStep1Fragment"
         android:label="SignupStep1Fragment"
         tools:layout="@layout/fragment_signup_step1">
         <action
@@ -43,7 +43,7 @@
 
     <fragment
         android:id="@+id/signupStep2Fragment"
-        android:name="com.example.unicarapp.ui.main.SignupStep2Fragment"
+        android:name="com.example.unicarapp.ui.welcome.SignupStep2Fragment"
         android:label="SignupStep2Fragment"
         tools:layout="@layout/fragment_signup_step2">
         <action
@@ -59,7 +59,7 @@
 
     <fragment
         android:id="@+id/signupStep3Fragment"
-        android:name="com.example.unicarapp.ui.main.SignupStep3Fragment"
+        android:name="com.example.unicarapp.ui.welcome.SignupStep3Fragment"
         android:label="SignupStep3Fragment"
         tools:layout="@layout/fragment_signup_step3">
         <action
@@ -72,7 +72,7 @@
 
     <fragment
         android:id="@+id/signupSummaryFragment"
-        android:name="com.example.unicarapp.ui.main.SignupSummaryFragment"
+        android:name="com.example.unicarapp.ui.welcome.SignupSummaryFragment"
         android:label="SignupSummaryFragment"
         tools:layout="@layout/fragment_signup_summary">
         <action

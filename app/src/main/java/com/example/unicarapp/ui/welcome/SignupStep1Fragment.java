@@ -1,6 +1,12 @@
-package com.example.unicarapp.ui.main;
+package com.example.unicarapp.ui.welcome;
 
 import android.os.Bundle;
+import android.util.Patterns;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
+import android.widget.Button;
+import android.widget.EditText;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -8,13 +14,6 @@ import androidx.fragment.app.Fragment;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.navigation.Navigation;
-
-import android.util.Patterns;
-import android.view.LayoutInflater;
-import android.view.View;
-import android.view.ViewGroup;
-import android.widget.Button;
-import android.widget.EditText;
 
 import com.example.unicarapp.R;
 import com.example.unicarapp.databinding.FragmentSignupStep1Binding;
@@ -68,8 +67,6 @@ public class SignupStep1Fragment extends Fragment {
     }
 
     private void initFormState() {
-        emailEt.addTextChangedListener(new FormTextWatcher(formState, emailEt));
-
         formState = signupViewModel.getStep1FormState();
 
         FormFieldState emailField = formState.addField(emailEt.getId(), Patterns.EMAIL_ADDRESS,
@@ -80,6 +77,8 @@ public class SignupStep1Fragment extends Fragment {
 
         formState.getFormStateLiveData()
                 .observe(getViewLifecycleOwner(), new Step1ValidationObserver());
+
+        emailEt.addTextChangedListener(new FormTextWatcher(formState, emailEt));
     }
 
     private class Step1ValidationObserver implements Observer<FormState> {

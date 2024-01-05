@@ -1,6 +1,11 @@
-package com.example.unicarapp.ui.main;
+package com.example.unicarapp.ui.welcome;
 
 import android.os.Bundle;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
+import android.widget.Button;
+import android.widget.EditText;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -8,12 +13,6 @@ import androidx.fragment.app.Fragment;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.navigation.Navigation;
-
-import android.view.LayoutInflater;
-import android.view.View;
-import android.view.ViewGroup;
-import android.widget.Button;
-import android.widget.EditText;
 
 import com.example.unicarapp.R;
 import com.example.unicarapp.databinding.FragmentSignupStep3Binding;
@@ -73,10 +72,6 @@ public class SignupStep3Fragment extends Fragment {
     }
 
     private void initFormState() {
-        carPlateEt.addTextChangedListener(new FormTextWatcher(formState, carPlateEt));
-        carColorEt.addTextChangedListener(new FormTextWatcher(formState, carColorEt));
-        carModelEt.addTextChangedListener(new FormTextWatcher(formState, carModelEt));
-
         formState = signupViewModel.getStep3FormState();
 
         formState.addField(carPlateEt.getId());
@@ -85,6 +80,10 @@ public class SignupStep3Fragment extends Fragment {
 
         formState.getFormStateLiveData()
                 .observe(getViewLifecycleOwner(), new Step3ValidationObserver());
+
+        carPlateEt.addTextChangedListener(new FormTextWatcher(formState, carPlateEt));
+        carColorEt.addTextChangedListener(new FormTextWatcher(formState, carColorEt));
+        carModelEt.addTextChangedListener(new FormTextWatcher(formState, carModelEt));
     }
 
     private class Step3ValidationObserver implements Observer<FormState> {

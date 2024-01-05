@@ -1,4 +1,4 @@
-package com.example.unicarapp.ui.main;
+package com.example.unicarapp.ui.welcome;
 
 import android.app.Application;
 

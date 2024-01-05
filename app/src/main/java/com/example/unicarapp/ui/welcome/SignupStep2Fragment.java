@@ -1,6 +1,11 @@
-package com.example.unicarapp.ui.main;
+package com.example.unicarapp.ui.welcome;
 
 import android.os.Bundle;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
+import android.widget.Button;
+import android.widget.EditText;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -8,12 +13,6 @@ import androidx.fragment.app.Fragment;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.navigation.Navigation;
-
-import android.view.LayoutInflater;
-import android.view.View;
-import android.view.ViewGroup;
-import android.widget.Button;
-import android.widget.EditText;
 
 import com.example.unicarapp.R;
 import com.example.unicarapp.databinding.FragmentSignupStep2Binding;
@@ -87,11 +86,6 @@ public class SignupStep2Fragment extends Fragment {
     }
 
     private void initFormState() {
-
-        firstnameEt.addTextChangedListener(new FormTextWatcher(formState, firstnameEt));
-        lastnameEt.addTextChangedListener(new FormTextWatcher(formState, lastnameEt));
-        departmentEt.addTextChangedListener(new FormTextWatcher(formState, departmentEt));
-
         formState = signupViewModel.getStep2FormState();
 
         formState.addField(firstnameEt.getId());
@@ -100,6 +94,10 @@ public class SignupStep2Fragment extends Fragment {
 
         formState.getFormStateLiveData()
                 .observe(getViewLifecycleOwner(), new Step2ValidationObserver());
+
+        firstnameEt.addTextChangedListener(new FormTextWatcher(formState, firstnameEt));
+        lastnameEt.addTextChangedListener(new FormTextWatcher(formState, lastnameEt));
+        departmentEt.addTextChangedListener(new FormTextWatcher(formState, departmentEt));
     }
 
     private class Step2ValidationObserver implements Observer<FormState> {
