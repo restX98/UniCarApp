@@ -70,12 +70,14 @@ public class SignupViewModel extends ViewModel {
         userRepository.signUp(newUser, password, new AuthRepository.SignupCallback() {
             @Override
             public void onSignupSuccess() {
-                authenticationStatus.setValue(new AuthRepository.AuthStatus(true, null));
+                authenticationStatus
+                        .setValue(new AuthRepository.AuthStatus(true, null));
             }
 
             @Override
             public void onSignupFailure(String errorMessage) {
-                authenticationStatus.setValue(new AuthRepository.AuthStatus(false, errorMessage));
+                authenticationStatus
+                        .setValue(new AuthRepository.AuthStatus(false, errorMessage));
             }
         });
     }

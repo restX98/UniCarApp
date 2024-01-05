@@ -9,8 +9,6 @@ import androidx.fragment.app.Fragment;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
 
-import android.text.Editable;
-import android.text.TextWatcher;
 import android.util.Patterns;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -24,6 +22,7 @@ import com.example.unicarapp.databinding.FragmentLoginBinding;
 import com.example.unicarapp.ui.MapActivity;
 import com.example.unicarapp.utils.formvalidation.FormFieldState;
 import com.example.unicarapp.utils.formvalidation.FormState;
+import com.example.unicarapp.utils.formvalidation.FormTextWatcher;
 
 public class LoginFragment extends Fragment {
 
@@ -40,13 +39,13 @@ public class LoginFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
+        loginViewModel = new ViewModelProvider(this).get(LoginViewModel.class);
+
         binding = FragmentLoginBinding.inflate(inflater, container, false);
 
         emailEt = binding.etEmail;
         passwordEt = binding.etPassword;
         loginBtn = binding.btnLogin;
-
-        loginViewModel = new ViewModelProvider(this).get(LoginViewModel.class);
 
         return binding.getRoot();
     }
@@ -57,9 +56,11 @@ public class LoginFragment extends Fragment {
 
         initFormState();
 
-        loginViewModel.getAuthenticationStatus().observe(getViewLifecycleOwner(), new AuthenticationObserver());
+        loginViewModel.getAuthenticationStatus().observe(
+                getViewLifecycleOwner(), new AuthenticationObserver());
 
-        loginBtn.setOnClickListener(v -> loginViewModel.signIn(emailEt.getText().toString(), passwordEt.getText().toString()));
+        loginBtn.setOnClickListener(v ->
+                loginViewModel.signIn(emailEt.getText().toString(), passwordEt.getText().toString()));
     }
 
     @Override
@@ -69,15 +70,16 @@ public class LoginFragment extends Fragment {
     }
 
     private void initFormState() {
-        emailEt.addTextChangedListener(new EmailTextListeners());
-        passwordEt.addTextChangedListener(new PasswordTextListeners());
+        emailEt.addTextChangedListener(new FormTextWatcher(formState, emailEt));
+        passwordEt.addTextChangedListener(new FormTextWatcher(formState, passwordEt));
 
         formState = loginViewModel.getLoginFormState();
 
         formState.addField(emailEt.getId(), Patterns.EMAIL_ADDRESS);
         formState.addField(passwordEt.getId());
 
-        formState.getFormStateLiveData().observe(getViewLifecycleOwner(), new LoginValidationObserver());
+        formState.getFormStateLiveData().observe(
+                getViewLifecycleOwner(), new LoginValidationObserver());
     }
 
     private class AuthenticationObserver implements Observer<AuthRepository.AuthStatus> {
@@ -86,7 +88,8 @@ public class LoginFragment extends Fragment {
             if(authenticationResult.isSuccess()) {
                 startActivity(new Intent(requireContext(), MapActivity.class));
             } else {
-                Toast.makeText(requireContext(), authenticationResult.getErrorMessage(), Toast.LENGTH_SHORT).show();
+                Toast.makeText(requireContext(),
+                        authenticationResult.getErrorMessage(), Toast.LENGTH_SHORT).show();
             }
         }
     }
@@ -110,42 +113,6 @@ public class LoginFragment extends Fragment {
             if(!passwordState.isValid() && passwordState.getError() != null) {
                 passwordEt.setError(passwordState.getError());
             }
-        }
-    }
-
-    private class EmailTextListeners implements TextWatcher {
-
-        @Override
-        public void beforeTextChanged(CharSequence s, int start, int count, int after) {
-
-        }
-
-        @Override
-        public void onTextChanged(CharSequence s, int start, int before, int count) {
-
-        }
-
-        @Override
-        public void afterTextChanged(Editable s) {
-            formState.getFieldState(emailEt.getId()).validate(emailEt.getText().toString());
-        }
-    }
-
-    private class PasswordTextListeners implements TextWatcher {
-
-        @Override
-        public void beforeTextChanged(CharSequence s, int start, int count, int after) {
-
-        }
-
-        @Override
-        public void onTextChanged(CharSequence s, int start, int before, int count) {
-
-        }
-
-        @Override
-        public void afterTextChanged(Editable s) {
-            formState.getFieldState(passwordEt.getId()).validate(passwordEt.getText().toString());
         }
     }
 }

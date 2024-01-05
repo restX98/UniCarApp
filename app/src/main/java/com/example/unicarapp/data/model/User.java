@@ -1,6 +1,7 @@
 package com.example.unicarapp.data.model;
 
 public class User {
+    private String UID;
     private String email;
     private String firstname;
     private String lastname;
@@ -13,9 +14,12 @@ public class User {
     public User() {
     }
 
-    public User(String firstname, String lastname) {
-        this.firstname = firstname;
-        this.lastname = lastname;
+    public String getUID() {
+        return UID;
+    }
+
+    public void setUID(String UID) {
+        this.UID = UID;
     }
 
     public String getEmail() {

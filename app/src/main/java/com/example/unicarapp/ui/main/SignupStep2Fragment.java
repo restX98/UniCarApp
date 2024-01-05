@@ -9,8 +9,6 @@ import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.navigation.Navigation;
 
-import android.text.Editable;
-import android.text.TextWatcher;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -21,6 +19,7 @@ import com.example.unicarapp.R;
 import com.example.unicarapp.databinding.FragmentSignupStep2Binding;
 import com.example.unicarapp.utils.formvalidation.FormFieldState;
 import com.example.unicarapp.utils.formvalidation.FormState;
+import com.example.unicarapp.utils.formvalidation.FormTextWatcher;
 
 public class SignupStep2Fragment extends Fragment {
     private SignupViewModel signupViewModel;
@@ -89,9 +88,9 @@ public class SignupStep2Fragment extends Fragment {
 
     private void initFormState() {
 
-        firstnameEt.addTextChangedListener(new TextListeners(firstnameEt));
-        lastnameEt.addTextChangedListener(new TextListeners(lastnameEt));
-        departmentEt.addTextChangedListener(new TextListeners(departmentEt));
+        firstnameEt.addTextChangedListener(new FormTextWatcher(formState, firstnameEt));
+        lastnameEt.addTextChangedListener(new FormTextWatcher(formState, lastnameEt));
+        departmentEt.addTextChangedListener(new FormTextWatcher(formState, departmentEt));
 
         formState = signupViewModel.getStep2FormState();
 
@@ -99,7 +98,8 @@ public class SignupStep2Fragment extends Fragment {
         formState.addField(lastnameEt.getId());
         formState.addField(departmentEt.getId());
 
-        formState.getFormStateLiveData().observe(getViewLifecycleOwner(), new Step2ValidationObserver());
+        formState.getFormStateLiveData()
+                .observe(getViewLifecycleOwner(), new Step2ValidationObserver());
     }
 
     private class Step2ValidationObserver implements Observer<FormState> {
@@ -126,24 +126,6 @@ public class SignupStep2Fragment extends Fragment {
             if (!departmentState.isValid() && departmentState.getError() != null) {
                 departmentEt.setError(departmentState.getError());
             }
-        }
-    }
-
-    private class TextListeners implements TextWatcher {
-        private EditText editText;
-        public TextListeners(EditText editText) {
-            this.editText = editText;
-        }
-
-        @Override
-        public void beforeTextChanged(CharSequence s, int start, int count, int after) {}
-
-        @Override
-        public void onTextChanged(CharSequence s, int start, int before, int count) {}
-
-        @Override
-        public void afterTextChanged(Editable s) {
-            formState.getFieldState(editText.getId()).validate(editText.getText().toString());
         }
     }
 }

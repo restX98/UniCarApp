@@ -5,13 +5,10 @@ import android.os.Bundle;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
-import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
 
-import android.text.Editable;
-import android.text.TextWatcher;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -24,6 +21,7 @@ import com.example.unicarapp.databinding.FragmentSignupSummaryBinding;
 import com.example.unicarapp.ui.MapActivity;
 import com.example.unicarapp.utils.formvalidation.FormFieldState;
 import com.example.unicarapp.utils.formvalidation.FormState;
+import com.example.unicarapp.utils.formvalidation.FormTextWatcher;
 
 public class SignupSummaryFragment extends Fragment {
 
@@ -56,7 +54,8 @@ public class SignupSummaryFragment extends Fragment {
 
         initFormState();
 
-        signupViewModel.getAuthenticationStatus().observe(getViewLifecycleOwner(), new AuthenticationObserver());
+        signupViewModel.getAuthenticationStatus()
+                .observe(getViewLifecycleOwner(), new AuthenticationObserver());
 
         signupBtn.setOnClickListener(v -> {
             signupViewModel.signUp(passwordEt.getText().toString());
@@ -70,7 +69,7 @@ public class SignupSummaryFragment extends Fragment {
     }
 
     private void initFormState() {
-        passwordEt.addTextChangedListener(new TextListeners(passwordEt));
+        passwordEt.addTextChangedListener(new FormTextWatcher(formState, passwordEt));
 
         formState = signupViewModel.getSummaryFormState();
 
@@ -80,7 +79,8 @@ public class SignupSummaryFragment extends Fragment {
         );
         passwordField.setErrorMessage(FormFieldState.Status.INVALID_CUSTOM, "Min length is 6.");
 
-        formState.getFormStateLiveData().observe(getViewLifecycleOwner(), new SummaryValidationObserver());
+        formState.getFormStateLiveData()
+                .observe(getViewLifecycleOwner(), new SummaryValidationObserver());
     }
 
     private class AuthenticationObserver implements Observer<AuthRepository.AuthStatus> {
@@ -89,7 +89,8 @@ public class SignupSummaryFragment extends Fragment {
             if(authenticationResult.isSuccess()) {
                 startActivity(new Intent(requireContext(), MapActivity.class));
             } else {
-                Toast.makeText(requireContext(), authenticationResult.getErrorMessage(), Toast.LENGTH_SHORT).show();
+                Toast.makeText(requireContext(),
+                        authenticationResult.getErrorMessage(), Toast.LENGTH_SHORT).show();
             }
         }
     }
@@ -106,24 +107,6 @@ public class SignupSummaryFragment extends Fragment {
             if (!passwordState.isValid() && passwordState.getError() != null) {
                 passwordEt.setError(passwordState.getError());
             }
-        }
-    }
-
-    private class TextListeners implements TextWatcher {
-        private EditText editText;
-        public TextListeners(EditText editText) {
-            this.editText = editText;
-        }
-
-        @Override
-        public void beforeTextChanged(CharSequence s, int start, int count, int after) {}
-
-        @Override
-        public void onTextChanged(CharSequence s, int start, int before, int count) {}
-
-        @Override
-        public void afterTextChanged(Editable s) {
-            formState.getFieldState(editText.getId()).validate(editText.getText().toString());
         }
     }
 }

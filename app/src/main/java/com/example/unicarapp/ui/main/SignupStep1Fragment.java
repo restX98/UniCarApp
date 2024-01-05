@@ -9,8 +9,6 @@ import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.navigation.Navigation;
 
-import android.text.Editable;
-import android.text.TextWatcher;
 import android.util.Patterns;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -22,6 +20,7 @@ import com.example.unicarapp.R;
 import com.example.unicarapp.databinding.FragmentSignupStep1Binding;
 import com.example.unicarapp.utils.formvalidation.FormFieldState;
 import com.example.unicarapp.utils.formvalidation.FormState;
+import com.example.unicarapp.utils.formvalidation.FormTextWatcher;
 
 public class SignupStep1Fragment extends Fragment {
 
@@ -69,7 +68,7 @@ public class SignupStep1Fragment extends Fragment {
     }
 
     private void initFormState() {
-        emailEt.addTextChangedListener(new TextListeners(emailEt));
+        emailEt.addTextChangedListener(new FormTextWatcher(formState, emailEt));
 
         formState = signupViewModel.getStep1FormState();
 
@@ -79,7 +78,8 @@ public class SignupStep1Fragment extends Fragment {
         );
         emailField.setErrorMessage(FormFieldState.Status.INVALID_CUSTOM, "Domain not allowed.");
 
-        formState.getFormStateLiveData().observe(getViewLifecycleOwner(), new Step1ValidationObserver());
+        formState.getFormStateLiveData()
+                .observe(getViewLifecycleOwner(), new Step1ValidationObserver());
     }
 
     private class Step1ValidationObserver implements Observer<FormState> {
@@ -94,24 +94,6 @@ public class SignupStep1Fragment extends Fragment {
             if (!emailState.isValid() && emailState.getError() != null) {
                 emailEt.setError(emailState.getError());
             }
-        }
-    }
-
-    private class TextListeners implements TextWatcher {
-        private EditText editText;
-        public TextListeners(EditText editText) {
-            this.editText = editText;
-        }
-
-        @Override
-        public void beforeTextChanged(CharSequence s, int start, int count, int after) {}
-
-        @Override
-        public void onTextChanged(CharSequence s, int start, int before, int count) {}
-
-        @Override
-        public void afterTextChanged(Editable s) {
-            formState.getFieldState(editText.getId()).validate(editText.getText().toString());
         }
     }
 }
