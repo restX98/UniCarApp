@@ -12,7 +12,6 @@ import android.view.View;
 import com.example.unicarapp.R;
 import com.example.unicarapp.data.model.User;
 import com.example.unicarapp.databinding.ActivityMapBinding;
-import com.example.unicarapp.viewmodels.MapViewModel;
 import com.google.android.material.navigation.NavigationView;
 
 public class MapActivity extends AppCompatActivity {

@@ -1,4 +1,4 @@
-package com.example.unicarapp.viewmodels;
+package com.example.unicarapp.ui.map;
 
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;

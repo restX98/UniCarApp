@@ -6,7 +6,7 @@
     <data>
         <variable
             name="viewModel"
-            type="com.example.unicarapp.viewmodels.MapViewModel" />
+            type="com.example.unicarapp.ui.map.MapViewModel" />
     </data>
 
     <androidx.drawerlayout.widget.DrawerLayout
