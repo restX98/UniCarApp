@@ -12,14 +12,14 @@ import com.example.unicarapp.utils.formvalidation.FormState;
 public class SignupViewModel extends ViewModel {
 
     private final UserRepository userRepository;
-    private MutableLiveData<AuthRepository.AuthStatus> authenticationStatus = new MutableLiveData<>();
+    private final MutableLiveData<AuthRepository.AuthStatus> authenticationStatus = new MutableLiveData<>();
 
-    private FormState step1FormState = new FormState();
-    private FormState step2FormState = new FormState();
-    private FormState step3FormState = new FormState();
-    private FormState summaryFormState = new FormState();
+    private final FormState step1FormState = new FormState();
+    private final FormState step2FormState = new FormState();
+    private final FormState step3FormState = new FormState();
+    private final FormState summaryFormState = new FormState();
 
-    private User newUser = new User();
+    private final User newUser = new User();
 
     public SignupViewModel() {
         userRepository = UserRepository.getInstance();

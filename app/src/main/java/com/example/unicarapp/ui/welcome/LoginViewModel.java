@@ -14,9 +14,9 @@ import com.google.firebase.auth.FirebaseUser;
 
 public class LoginViewModel extends AndroidViewModel {
 
-    private FormState loginFormState = new FormState();
+    private final FormState loginFormState = new FormState();
 
-    private MutableLiveData<AuthRepository.AuthStatus> authenticationStatus = new MutableLiveData<>();
+    private final MutableLiveData<AuthRepository.AuthStatus> authenticationStatus = new MutableLiveData<>();
     private final UserRepository userRepository;
 
     public LoginViewModel(@NonNull Application application) {
@@ -30,10 +30,6 @@ public class LoginViewModel extends AndroidViewModel {
 
     public LiveData<AuthRepository.AuthStatus> getAuthenticationStatus() {
         return authenticationStatus;
-    }
-
-    public boolean isAuthenticated() {
-        return userRepository.isAuthenticated();
     }
 
     public void signIn(String email, String password) {

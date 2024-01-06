@@ -25,7 +25,6 @@ public class SignupStep3Fragment extends Fragment {
     private SignupViewModel signupViewModel;
     private FragmentSignupStep3Binding binding;
 
-    private FormState formState;
     private EditText carPlateEt;
     private EditText carColorEt;
     private EditText carModelEt;
@@ -72,7 +71,7 @@ public class SignupStep3Fragment extends Fragment {
     }
 
     private void initFormState() {
-        formState = signupViewModel.getStep3FormState();
+        FormState formState = signupViewModel.getStep3FormState();
 
         formState.addField(carPlateEt.getId());
         formState.addField(carColorEt.getId());

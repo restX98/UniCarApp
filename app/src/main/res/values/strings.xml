@@ -12,9 +12,12 @@
     <string name="label_car_color">Color</string>
     <string name="label_car_model">Model</string>
 
+    <string name="label_login_info_1">Insert a valid email to proceed</string>
+    <string name="label_login_info_2">Tell me about yourself...</string>
+    <string name="label_login_info_3">Please, insert some information about your car:</string>
     <string name="label_login">LOGIN</string>
     <string name="label_signup">SIGNUP</string>
-    <string name="label_next_step">Next Step</string>
+    <string name="label_next_step">Next step</string>
     <string name="label_goto_summary">Go to summary</string>
     <string name="label_has_car">Wanna share your car?</string>
 
@@ -38,6 +41,8 @@
     <string name="label_profile">Profile</string>
     <string name="label_history">History</string>
     <string name="label_settings">Settings</string>
+
+    <string name="description_logo_iv">Logo</string>
 
     <!--    Permissions    -->
     <string name="permission_rationale_location">Access to the location service is required to demonstrate the \'my location\' feature, which shows your current location on the map.</string>

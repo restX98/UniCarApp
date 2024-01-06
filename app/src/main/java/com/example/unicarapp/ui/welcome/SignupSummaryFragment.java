@@ -27,7 +27,6 @@ public class SignupSummaryFragment extends Fragment {
     private SignupViewModel signupViewModel;
     private FragmentSignupSummaryBinding binding;
 
-    FormState formState;
     private EditText passwordEt;
     private Button signupBtn;
 
@@ -68,7 +67,7 @@ public class SignupSummaryFragment extends Fragment {
     }
 
     private void initFormState() {
-        formState = signupViewModel.getSummaryFormState();
+        FormState formState = signupViewModel.getSummaryFormState();
 
         FormFieldState passwordField = formState.addField(passwordEt.getId(),
                 value -> value.length() > 5

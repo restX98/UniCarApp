@@ -24,7 +24,6 @@ public class SignupStep2Fragment extends Fragment {
     private SignupViewModel signupViewModel;
     private FragmentSignupStep2Binding binding;
 
-    private FormState formState;
     private EditText firstnameEt;
     private EditText lastnameEt;
     private EditText departmentEt;
@@ -86,7 +85,7 @@ public class SignupStep2Fragment extends Fragment {
     }
 
     private void initFormState() {
-        formState = signupViewModel.getStep2FormState();
+        FormState formState = signupViewModel.getStep2FormState();
 
         formState.addField(firstnameEt.getId());
         formState.addField(lastnameEt.getId());

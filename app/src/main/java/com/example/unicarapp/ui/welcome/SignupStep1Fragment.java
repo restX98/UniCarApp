@@ -26,14 +26,13 @@ public class SignupStep1Fragment extends Fragment {
     private SignupViewModel signupViewModel;
     private FragmentSignupStep1Binding binding;
 
-    private FormState formState;
     private EditText emailEt;
     private Button gotoStep2Btn;
 
     public SignupStep1Fragment() { }
 
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
+    public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         signupViewModel = new ViewModelProvider(requireActivity()).get(SignupViewModel.class);
 
@@ -67,7 +66,7 @@ public class SignupStep1Fragment extends Fragment {
     }
 
     private void initFormState() {
-        formState = signupViewModel.getStep1FormState();
+        FormState formState = signupViewModel.getStep1FormState();
 
         FormFieldState emailField = formState.addField(emailEt.getId(), Patterns.EMAIL_ADDRESS,
                 value -> value.endsWith("@mydomain.rest")

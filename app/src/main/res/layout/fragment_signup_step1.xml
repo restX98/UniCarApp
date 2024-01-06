@@ -24,7 +24,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="108dp"
-                android:text="Insert a valid email to proceed"
+                android:text="@string/label_login_info_1"
                 android:textSize="24sp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
@@ -39,6 +39,7 @@
                 android:hint="@string/label_email"
                 android:text="@={user.email}"
                 android:inputType="textEmailAddress"
+                android:autofillHints="emailAddress"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/tv_info_1"/>
@@ -48,22 +49,12 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="28dp"
-                android:text="Next Step"
+                android:text="@string/label_next_step"
                 android:enabled="false"
                 app:layout_constraintEnd_toEndOf="@+id/et_email"
                 app:layout_constraintStart_toStartOf="@+id/et_email"
                 app:layout_constraintTop_toBottomOf="@+id/et_email" />
 
-            <ImageButton
-                android:id="@+id/btn_back"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:backgroundTint="@android:color/transparent"
-                android:src="@drawable/ic_left_arrow"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
-
         </androidx.constraintlayout.widget.ConstraintLayout>
-
     </FrameLayout>
 </layout>
